@@ -1,0 +1,40 @@
+<!-- src/app/rrule-form/rrule-form.component.html -->
+<div>
+  <h2>Create iCalendar RRule String</h2>
+  <form (ngSubmit)="generateRRule()" #form="ngForm">
+    <div>
+      <label [for]="freq">Frequency:</label>
+      <select [(ngModel)]="freq" name="freq" required>
+        <option *ngFor="let frequency of frequencies" [ngValue]="frequency.value">{{ frequency.label }}</option>
+      </select>
+    </div>
+    <div>
+      <label [for]="interval">Interval:</label>
+      <input type="number" [(ngModel)]="interval" name="interval" required>
+    </div>
+    <div>
+      <label [for]="byweekday">By Weekday:</label>
+      <select multiple [(ngModel)]="byweekday" name="byweekday">
+        <option *ngFor="let day of weekdays" [ngValue]="day.value">{{ day.label }}</option>
+      </select>
+    </div>
+    <div>
+      <label [for]="dtstart">Start Date:</label>
+      <input type="date" [(ngModel)]="dtstart" name="dtstart" required>
+    </div>
+    <div>
+      <label [for]="until">Until Date (optional):</label>
+      <input type="date" [(ngModel)]="until" name="until">
+    </div>
+    <div>
+      <label [for]="count">Count (optional):</label>
+      <input type="number" [(ngModel)]="count" name="count">
+    </div>
+    <button type="submit">Generate RRule</button>
+  </form>
+
+  <div *ngIf="rruleString">
+    <h3>Generated RRule String:</h3>
+    <p>{{ rruleString }}</p>
+  </div>
+</div>
